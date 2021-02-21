@@ -29,12 +29,12 @@ round: {
 	type: Number,
 	default: 10,
 },
-// 弹窗内容宽度(当from=left或right时起作用)
+// 弹窗内容容器宽度(当from=left或right时起作用)
 width: {
 	type: String,
 	default: '60vw',
 },
-// 弹窗内容高度(当from=top或bottom时起作用)
+// 弹窗内容容器高度(当from=top或bottom时起作用)
 height: {
 	type: String,
 	default: '50vh',

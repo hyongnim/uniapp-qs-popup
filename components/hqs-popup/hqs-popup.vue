@@ -37,6 +37,7 @@
 	:type="from" class="hqs-popup">
 	<view class="qs-con" 
 		:style="conStyle" 
+		@mousedown="onTouch" @mousemove="onTouch" @mouseup="onTouch"
 		@touchstart="onTouch" @touchmove="onTouch" @touchend="onTouch">
 		<block v-if="isVertical">
 			<view class="qs-header" v-if="from == 'bottom' && showHeader">
@@ -169,12 +170,13 @@ export default {
 		},
 		onTouch(ev) {
 			// if(!this.maskClick) return
-			const { pageX, pageY } = ev.changedTouches[0] || {}
-			if(ev.type == 'touchstart') {
+			const { pageX, pageY } = ev.changedTouches[0] || ev
+			if(['touchstart', 'mousedown'].includes(ev.type)) {
 				this.startX = pageX
 				this.startY = pageY
 				this.startTime = ev.timeStamp
 			} else {
+				if(!this.startTime) return
 				const orien = this.isVertical ? 'Y' : 'X'
 				let moveDis = pageY - this.startY
 				if(this.from == 'left') moveDis = this.startX - pageX
@@ -183,7 +185,7 @@ export default {
 				if(!this.maskClick) moveDis /= 3
 				const duration = (ev.timeStamp - this.startTime)
 				const speed = moveDis/duration
-				if(ev.type == 'touchend') {
+				if(['touchend', 'mouseup'].includes(ev.type)) {
 					if(this.panStyle) {
 						if(this.maskClick && (moveDis > 120 || speed > 0.25)) {
 							this.close()
@@ -196,6 +198,7 @@ export default {
 						}, 300)
 					}
 					// conScrollTop = 0
+					this.startTime = 0
 					return
 				}
 				// if(this.scrollTop > 0) return
