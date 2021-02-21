@@ -18,7 +18,7 @@ hqs-popup弹窗组件是基于uni-popup组件开发的，增加了手势滑动�
 // 弹窗显示可通过v-model控制
 value: Boolean,
 
-// 弹窗打开开始方向
+// 弹窗打开来源方向 支持：bottom top left right
 from: {
 	type: String,
 	default: 'bottom',
