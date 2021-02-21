@@ -76,7 +76,12 @@
 </template>
 
 <script>
+import UniPopup from './uni-popup.vue'
+
 export default {
+	components: {
+		UniPopup,
+	},
 	props: {
 		// 弹窗显示可通过v-model控制
 		value: Boolean,

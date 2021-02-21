@@ -14,26 +14,22 @@
 <template>
 <view>
 	<view class="demo-act">
-		<button @click="showPop = true">演示 hqs-popup</button>
+		<button @click="showPop = true">显示弹窗 {{ showPop }}</button>
 		<button @click="showPopupFrom('bottom')">从底部弹出</button>
 		<button @click="showPopupFrom('left')">从左侧弹出</button>
 		<button @click="showPopupFrom('right')">从右侧弹出</button>
 		<button @click="showPopupFrom('top')">从上方弹出</button>
 	</view>
 	
-	<hqs-popup title="可滑动关闭弹窗组件" :from="popFrom"
+	<hqs-popup title="向下滑动关闭" :from="popFrom"
 		v-model="showPop">
 		<template v-slot:close v-if="myClose">
 			<text>X</text>
 		</template>
 		
 		<view>
-			<view style="padding: 10px;" v-if="popFrom == 'bottom'">
-				<button @click="myClose = !myClose">自定义关闭插槽内容</button>
-			</view>
-			
 			<view class="list-item"
-				v-for="(it, i) in 20" :key="i">
+				v-for="(it, i) in list" :key="i">
 				<text>第{{ i }}行</text>
 			</view>
 		</view>

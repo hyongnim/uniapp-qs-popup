@@ -12,7 +12,7 @@
 </template>
 
 <script>
-	import uniTransition from '../uni-transition/uni-transition.vue'
+	import uniTransition from './uni-transition.vue'
 	
 	/**
 	 * PopUp 弹出层
