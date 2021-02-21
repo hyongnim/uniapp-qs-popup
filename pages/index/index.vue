@@ -21,7 +21,7 @@
 		<button @click="showPopupFrom('top')">从上方弹出</button>
 	</view>
 	
-	<hqs-popup title="滑动关闭弹窗组件" :from="popFrom"
+	<hqs-popup title="可滑动关闭弹窗组件" :from="popFrom"
 		v-model="showPop">
 		<template v-slot:close v-if="myClose">
 			<text>X</text>
