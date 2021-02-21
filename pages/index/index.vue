@@ -8,26 +8,41 @@
 	button {
 		margin-top: 15px;
 	}
+	.item {
+		margin-top: 15px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		switch {
+			
+		}
+	}
 }
 </style>
 
 <template>
 <view>
+	
 	<view class="demo-act">
-		<button @click="showPop = true">显示弹窗 {{ showPop }}</button>
+		<view class="item">
+			<text>显示弹窗</text>
+			<switch :checked="showPop" @change="onShowPopup"></switch>
+		</view>
+		<view class="item">
+			<text>点击背景可否关闭(maskClick)</text>
+			<switch v-model="maskClick" @change="onMaskClick"/>
+		</view>
+		
 		<button @click="showPopupFrom('bottom')">从底部弹出</button>
 		<button @click="showPopupFrom('left')">从左侧弹出</button>
 		<button @click="showPopupFrom('right')">从右侧弹出</button>
 		<button @click="showPopupFrom('top')">从上方弹出</button>
 	</view>
 	
-	<hqs-popup title="向下滑动关闭" :from="popFrom"
+	<hqs-popup title="向下滑动关闭" :from="popFrom" :mask-click="maskClick"
 		v-model="showPop">
-		<template v-slot:close v-if="myClose">
-			<text>X</text>
-		</template>
-		
 		<view>
+			<view class="list-item" @click="showPop = false">关闭弹窗</view>
 			<view class="list-item"
 				v-for="(it, i) in list" :key="i">
 				<text>第{{ i }}行</text>
@@ -49,10 +64,16 @@ export default {
 			showPop: false,
 			popFrom: 'bottom',
 			list: new Array(20).fill(0),
-			myClose: false,
+			maskClick: true,
 		}
 	},
 	methods: {
+		onShowPopup(e) {
+			this.showPop = e.detail.value
+		},
+		onMaskClick(e) {
+			this.maskClick = e.detail.value
+		},
 		showPopupFrom(from) {
 			this.popFrom = from
 			this.showPop = true
